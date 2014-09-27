@@ -9,24 +9,41 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.axis2</groupId>
-                <artifactId>axis2-wsdl2code-maven-plugin</artifactId>
-                <version>1.4</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>axistools-maven-plugin</artifactId>
+                <configuration>
+                    <sourceDirectory>src/main/resource/WSDL</sourceDirectory>
+                    <wsdlFiles>
+                        <wsdlFile>ws_post_thread.wsdl</wsdlFile>
+                    </wsdlFiles>
+                    <testCases>false</testCases>
+                    <runTestCasesAsUnitTests>false</runTestCasesAsUnitTests>
+                    <subPackageByFileName>false</subPackageByFileName>
+                    <packageSpace>es.josevavia.cfs_ws_test.post_thread</packageSpace>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>wsdl2code</goal>
+                            <goal>wsdl2java</goal>
                         </goals>
-                        <configuration>
-                            <packageName>es.josevavia.cfs</packageName>
-                            <wsdlFile>http://confirmsign.local/ws_dev/v3/ws_get_thread_detail.php?wsdl</wsdlFile>
-                            <databindingName>xmlbeans</databindingName>
-                        </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.mail</groupId>
+                        <artifactId>mail</artifactId>
+                        <version>1.4</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>javax.activation</groupId>
+                        <artifactId>activation</artifactId>
+                        <version>1.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -34,10 +51,54 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.apache.axis2</groupId>
-            <artifactId>axis2</artifactId>
+            <groupId>org.apache.axis</groupId>
+            <artifactId>axis</artifactId>
             <version>1.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxrpc-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.rpc</groupId>
+            <artifactId>jaxrpc-impl</artifactId>
+            <version>1.1.3_01</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-discovery</groupId>
+            <artifactId>commons-discovery</artifactId>
+            <version>0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+
     </dependencies>
 </project>

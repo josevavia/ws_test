@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:cfs_ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:cfs_ws">
+    <types>
+        <xsd:schema targetNamespace="urn:cfs_ws"
+                >
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+            <xsd:complexType name="login">
+                <xsd:all>
+                    <xsd:element name="user" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="password" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="attachment">
+                <xsd:all>
+                    <xsd:element name="filename" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="filedata" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="attachments">
+                <xsd:sequence>
+                    <xsd:element name="attachment" type="tns:attachment" minOccurs="1" maxOccurs="unbounded" nillable="false"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="agreement">
+                <xsd:all>
+                    <xsd:element name="must_accept_terms" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="accept_check_label" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="terms" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="accept_button_text" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="decline_button_text" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="buttons_style" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="agreement_deadline_fixed" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="agreement_deadline_from_first_read" type="xsd:integer" minOccurs="0" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="line">
+                <xsd:all>
+                    <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="quantity" type="xsd:integer" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="unitary_base_price" type="xsd:float" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="tax_percent" type="xsd:float" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="unitary_tax_price" type="xsd:float" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="subtotal_line_price" type="xsd:float" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="total_line_price" type="xsd:float" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="lines">
+                <xsd:sequence>
+                    <xsd:element name="line" type="tns:line" minOccurs="1" maxOccurs="unbounded" nillable="false"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="payment_gateway">
+                <xsd:all>
+                    <xsd:element name="provider" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="currency" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="title" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="lines" type="tns:lines" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="reiterations">
+                <xsd:sequence>
+                    <xsd:element name="days_from_post" type="xsd:integer" minOccurs="1" maxOccurs="4" nillable="false"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="smtp">
+                <xsd:all>
+                    <xsd:element name="server_name" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="port" type="xsd:integer" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="authenticate" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="user" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="password" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="email">
+                <xsd:all>
+                    <xsd:element name="sender_email" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="sender_name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="receiver_email" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="receiver_name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="notification_template" type="xsd:integer" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="notification_text" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="reiterations" type="tns:reiterations" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="smtp" type="tns:smtp" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="sms">
+                <xsd:all>
+                    <xsd:element name="phone_number" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="print">
+                <xsd:all>
+                    <xsd:element name="receiver_id" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="receiver_name" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="postal_address" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="city" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="state" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="country" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="zip_code" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="content_certification" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="acknowledgment_of_receipt" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="notification_channel">
+                <xsd:all>
+                    <xsd:element name="email" type="tns:email" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="sms" type="tns:sms" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="print" type="tns:print" minOccurs="0" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="thread">
+                <xsd:all>
+                    <xsd:element name="subject" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="content" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="external_id" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="thread_type" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="start_send_date" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="days_to_refuse" type="xsd:integer" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="attachments" type="tns:attachments" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="agreement" type="tns:agreement" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="response_allowed" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="response_attachments_allowed" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="payment_gateway" type="tns:payment_gateway" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="notification_channel" type="tns:notification_channel" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="process_result">
+                <xsd:all>
+                    <xsd:element name="code" type="xsd:integer" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="imposition_date" type="xsd:dateTime" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xsd:element name="cfscode" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                </xsd:all>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="postThreadRequest">
+        <part name="version" type="xsd:string" />
+        <part name="login" type="tns:login" />
+        <part name="thread" type="tns:thread" /></message>
+    <message name="postThreadResponse">
+        <part name="process_result" type="tns:process_result" /></message>
+    <portType name="cfs_WebservicePortType">
+        <operation name="postThread">
+            <input message="tns:postThreadRequest"/>
+            <output message="tns:postThreadResponse"/>
+        </operation>
+    </portType>
+    <binding name="cfs_WebserviceBinding" type="tns:cfs_WebservicePortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="postThread">
+            <soap:operation soapAction="urn:cfs_ws#postThread" style="rpc"/>
+            <input><soap:body use="encoded" namespace="urn:cfs_ws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:cfs_ws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+    </binding>
+    <service name="cfs_Webservice">
+        <port name="cfs_WebservicePort" binding="tns:cfs_WebserviceBinding">
+            <soap:address location="http://confirmsign.local/ws_dev/v3/ws_post_thread.php"/>
+        </port>
+    </service>
+</definitions>
