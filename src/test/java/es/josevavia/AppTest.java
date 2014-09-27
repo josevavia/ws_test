@@ -85,12 +85,13 @@ public class AppTest
         attachment3.setFilename("test3.pdf");
         attachment3.setFiledata("abc");
 
+        Attachment[] attachments_list = new Attachment[3];
+        attachments_list[0] = attachment1;
+        attachments_list[1] = attachment2;
+        attachments_list[2] = attachment3;
+
         Attachments attachments = new Attachments();
-        attachments.setAttachment(new Attachment[]{
-                attachment1,
-                attachment2,
-                attachment3
-        });
+        attachments.setAttachment(attachments_list);
 
         Thread thread = new Thread();
         thread.setExternal_id("0");
@@ -105,7 +106,7 @@ public class AppTest
             System.out.println("Code: "+value.getCode());
             System.out.println("Cfscode: "+value.getCfscode());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Exception: "+e.getMessage());
             e.printStackTrace();
         }
         // TBD - validate results
