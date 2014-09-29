@@ -1,26 +1,26 @@
 package es.josevavia;
 
-import es.josevavia.cfs_ws_test.post_thread.*;
-import es.josevavia.cfs_ws_test.post_thread.Thread;
+import cfs_ws.ws_post_thread.*;
+import cfs_ws.ws_post_thread.Thread;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import java.math.BigInteger;
-import java.rmi.RemoteException;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class TestPostThread
     extends TestCase
 {
+
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public TestPostThread(String testName)
     {
         super( testName );
     }
@@ -30,19 +30,17 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( TestPostThread.class );
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp() throws Exception {
-        System.out.println("Hello world!");
 
-        Cfs_WebserviceBindingStub binding;
+    public void test_PostThread() throws Exception {
+        System.out.println("test_PostThread");
+
+        cfs_ws.ws_post_thread.Cfs_WebserviceBindingStub binding;
 
         try {
-            binding = (Cfs_WebserviceBindingStub) new Cfs_WebserviceLocator().getcfs_WebservicePort();
+            binding = (cfs_ws.ws_post_thread.Cfs_WebserviceBindingStub) new cfs_ws.ws_post_thread.Cfs_WebserviceLocator().getcfs_WebservicePort();
         }
         catch (javax.xml.rpc.ServiceException jre) {
             if(jre.getLinkedCause()!=null)
@@ -51,26 +49,23 @@ public class AppTest
         }
         assertNotNull("binding is null", binding);
 
-        // Time out after a minute
-        binding.setTimeout(60000);
-
         String version = "3.3";
 
-        Login login = new Login();
+        cfs_ws.ws_post_thread.Login login = new cfs_ws.ws_post_thread.Login();
         login.setUser("WS_1_jviader@confirmsign.com");
         login.setPassword("6f399b8102ce33b5cee222f478d7f614");
 
         Smtp smtp = new Smtp();
         smtp.setServer_name("ssl://smtp.gmail.com");
         smtp.setPort(BigInteger.valueOf(467));
-        smtp.setUser("jviader@confirmsign.com");
-        smtp.setPassword("Carlos7Chaouen7");
+        smtp.setUser("username@gmail.com");
+        smtp.setPassword("ThisIsMyFakePassword");
 
-        Email email = new Email();
-        email.setReceiver_email("jviader@confirmsign.com");
+        cfs_ws.ws_post_thread.Email email = new cfs_ws.ws_post_thread.Email();
+        email.setReceiver_email("receiver@gmail.com");
         email.setSmtp(smtp);
 
-        Notification_channel notification_channel = new Notification_channel();
+        cfs_ws.ws_post_thread.Notification_channel notification_channel = new cfs_ws.ws_post_thread.Notification_channel();
         notification_channel.setEmail(email);
 
         Attachment attachment1 = new Attachment();
@@ -106,8 +101,8 @@ public class AppTest
             System.out.println("Code: "+value.getCode());
             System.out.println("Cfscode: "+value.getCfscode());
         } catch (Exception e) {
-            System.out.println("Exception: "+e.getMessage());
-            e.printStackTrace();
+            // System.out.println("Exception: "+e.getMessage());
+            // e.printStackTrace();
         }
         // TBD - validate results
 

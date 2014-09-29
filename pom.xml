@@ -12,14 +12,16 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>axistools-maven-plugin</artifactId>
                 <configuration>
-                    <sourceDirectory>src/main/resource/WSDL</sourceDirectory>
+                    <sourceDirectory>src/main/resources/wsdl</sourceDirectory>
                     <wsdlFiles>
                         <wsdlFile>ws_post_thread.wsdl</wsdlFile>
+                        <wsdlFile>ws_get_thread_detail.wsdl</wsdlFile>
+                        <wsdlFile>ws_query_threads_list.wsdl</wsdlFile>
                     </wsdlFiles>
                     <testCases>false</testCases>
                     <runTestCasesAsUnitTests>false</runTestCasesAsUnitTests>
-                    <subPackageByFileName>false</subPackageByFileName>
-                    <packageSpace>es.josevavia.cfs_ws_test.post_thread</packageSpace>
+                    <subPackageByFileName>true</subPackageByFileName>
+                    <packageSpace>cfs_ws</packageSpace>
                 </configuration>
                 <executions>
                     <execution>
